@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkinSense — AI-Powered Personalized Skincare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=lavender-clean">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <!-- Lavender Ambient Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+
+  <!-- Minimal Lavender Navbar (No 2.0 bar) -->
+  <header class="navbar-wrapper" id="header">
+    <nav class="navbar container">
+      <a href="#" class="logo">
+        <div class="logo-icon-wrapper">
+          <i data-lucide="sparkles" class="logo-icon"></i>
+        </div>
+        <span class="logo-text">Skin<span>Sense</span></span>
+      </a>
+
+      <div class="nav-links" id="navMenu">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="#hydration" class="nav-link">Hydration Map 💧</a>
+        <a href="#features" class="nav-link">Features</a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="loginBtn" aria-label="Open Login Modal">
+          <i data-lucide="user" class="btn-icon"></i>
+          <span>Login</span>
+        </button>
+        <button class="btn btn-primary" id="navCtaBtn" onclick="openCameraModal()">
+          <i data-lucide="camera" class="btn-icon"></i>
+          <span>Scan Face</span>
+        </button>
+        <button class="hamburger-btn" id="mobileMenuBtn" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu" id="menuOpenIcon"></i>
+          <i data-lucide="x" id="menuCloseIcon" class="hidden"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <div class="drawer-links">
+      <a href="#home" class="drawer-link active">Home</a>
+      <a href="#how-it-works" class="drawer-link">How It Works</a>
+      <a href="#hydration" class="drawer-link">Hydration Map 💧</a>
+      <a href="#features" class="drawer-link">Features</a>
+    </div>
+    <div class="drawer-actions">
+      <button class="btn btn-outline w-full" id="mobileLoginBtn">Login</button>
+      <button class="btn btn-primary w-full" onclick="openCameraModal(); toggleMobileMenu();">
+        <i data-lucide="camera"></i> Scan Face with Camera
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- Minimal Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="pill-tag">
+            <span class="pill-dot"></span>
+            <span class="pill-text">AI Facial Diagnostics & Routine Builder</span>
+          </div>
+          <h1 class="hero-title">
+            Skincare that understands your <span class="italic-serif highlight-text">skin barrier</span>.
+          </h1>
+          <p class="hero-subtitle">
+            Take a live face photo or answer 3 quick questions. SkinSense pinpoints barrier health, oil-moisture balance, and customizes your daily AM/PM routine.
+          </p>
+
+          <div class="hero-cta-group">
+            <button class="btn btn-primary btn-lg shadow-glow" onclick="openCameraModal()">
+              <i data-lucide="camera" class="btn-icon"></i>
+              <span>Take Face Photo to Assess</span>
+            </button>
+            <button class="btn btn-secondary btn-lg" onclick="openAssessmentModal()">
+              <i data-lucide="clipboard-list" class="btn-icon"></i>
+              <span>Take Quick Quiz</span>
+            </button>
+          </div>
+
+          <div class="hero-trust">
+            <div class="stars">
+              <i data-lucide="star" class="star-icon"></i>
+              <i data-lucide="star" class="star-icon"></i>
+              <i data-lucide="star" class="star-icon"></i>
+              <i data-lucide="star" class="star-icon"></i>
+              <i data-lucide="star" class="star-icon"></i>
+            </div>
+            <span><strong>4.9/5 rating</strong> &middot; 120,000+ personalized routines created</span>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="visual-card-wrapper">
+            <!-- Glass Diagnostic Dashboard Mockup -->
+            <div class="glass-card main-hero-card">
+              <div class="card-header-bar">
+                <div class="client-info">
+                  <div class="client-avatar">
+                    <i data-lucide="camera"></i>
+                  </div>
+                  <div>
+                    <h2 class="client-name">AI Skin Diagnostic</h2>
+                    <span class="client-status"><span class="live-pulse"></span> Camera Scan Ready</span>
+                  </div>
+                </div>
+                <button class="badge-accent-btn" onclick="openCameraModal()">
+                  <i data-lucide="scan"></i> Launch Scanner
+                </button>
+              </div>
+
+              <!-- Quick Metrics -->
+              <div class="metrics-grid">
+                <div class="metric-box">
+                  <span class="metric-label">Barrier Health</span>
+                  <div class="metric-value-row">
+                    <span class="metric-number">92%</span>
+                    <span class="metric-trend positive"><i data-lucide="trending-up"></i> Optimal</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 92%;"></div>
+                  </div>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-label">Hydration Index</span>
+                  <div class="metric-value-row">
+                    <span class="metric-number">88%</span>
+                    <span class="metric-trend positive"><i data-lucide="droplets"></i> High</span>
+                  </div>
+                  <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 88%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Routine Preview Tabs -->
+              <div class="routine-preview-box">
+                <div class="routine-time-toggle">
+                  <button class="time-tab active" id="amTabBtn" onclick="toggleRoutineTime('am')">
+                    <i data-lucide="sun"></i> AM Ritual
+                  </button>
+                  <button class="time-tab" id="pmTabBtn" onclick="toggleRoutineTime('pm')">
+                    <i data-lucide="moon"></i> PM Ritual
+                  </button>
+                </div>
+
+                <div class="routine-steps-list" id="routineStepsContainer">
+                  <div class="routine-step-item">
+                    <span class="step-num">01</span>
+                    <div class="step-desc">
+                      <h4>Ceramide Gel Hydrating Cleanser</h4>
+                      <p>Preserves acid mantle &middot; pH 5.5 balance</p>
+                    </div>
+                    <span class="tag-pill">Gentle</span>
+                  </div>
+                  <div class="routine-step-item">
+                    <span class="step-num">02</span>
+                    <div class="step-desc">
+                      <h4>10% Niacinamide + Zinc Serum</h4>
+                      <p>Pore refinement &middot; Sebum control</p>
+                    </div>
+                    <span class="tag-pill active-pill">Active</span>
+                  </div>
+                  <div class="routine-step-item">
+                    <span class="step-num">03</span>
+                    <div class="step-desc">
+                      <h4>Squalane Peptide Light Barrier Cream</h4>
+                      <p>Trans-epidermal water loss shield</p>
+                    </div>
+                    <span class="tag-pill">Barrier</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Floating Widgets -->
+              <div class="floating-badge badge-top-right">
+                <i data-lucide="shield-check" class="badge-icon-shield"></i>
+                <div>
+                  <span class="f-title">Zero Irritants</span>
+                  <span class="f-sub">Fragrance & Alcohol Free</span>
+                </div>
+              </div>
+
+              <div class="floating-badge badge-bottom-left">
+                <i data-lucide="camera" class="badge-icon-weather"></i>
+                <div>
+                  <span class="f-title">Facial Analysis</span>
+                  <span class="f-sub">Real-Time Texture Map</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section (Minimal 3 Steps) -->
+    <section class="section how-it-works-section" id="how-it-works">
+      <div class="container">
+        <div class="section-badge-center">
+          <span class="section-tag">Simple & Scientific</span>
+        </div>
+        <h2 class="section-title text-center">
+          How SkinSense Works in <span class="italic-serif highlight-text">3 Easy Steps</span>
+        </h2>
+        <p class="section-subtitle text-center">
+          Effortless skin clarity in under 60 seconds.
+        </p>
+
+        <div class="steps-container">
+          <!-- Step 1 -->
+          <div class="step-card" onclick="openCameraModal()">
+            <div class="step-badge">Step 01</div>
+            <div class="step-icon-circle">
+              <i data-lucide="camera"></i>
+            </div>
+            <h3 class="step-heading">1. Assess Your Skin</h3>
+            <p class="step-text">
+              Snap a quick selfie with your camera or answer 3 simple lifestyle questions to map your barrier health and sensitivity.
+            </p>
+            <span class="card-action-link">Open Camera &rarr;</span>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-badge">Step 02</div>
+            <div class="step-icon-circle">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <h3 class="step-heading">2. Get Personalized Insights</h3>
+            <p class="step-text">
+              Our AI calculates your Barrier Health Index and reveals the exact ingredients and pH levels your skin requires.
+            </p>
+            <span class="card-action-link">Scientific Breakdown</span>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-badge">Step 03</div>
+            <div class="step-icon-circle">
+              <i data-lucide="check-circle-2"></i>
+            </div>
+            <h3 class="step-heading">3. Follow Your Routine</h3>
+            <p class="step-text">
+              Follow your tailored morning and evening rituals with step-by-step guidance, ingredient conflict checks, and hydration tips.
+            </p>
+            <span class="card-action-link">Daily Calming Plan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW SECTION: Beauty Hydration Map & Interactive Water Tracker -->
+    <section class="section hydration-section" id="hydration">
+      <div class="container">
+        <div class="section-badge-center">
+          <span class="section-tag">Daily Glow Habit</span>
+        </div>
+        <h2 class="section-title text-center">
+          Beauty Hydration <span class="italic-serif highlight-text">Timeline & Map</span> 💧
+        </h2>
+        <p class="section-subtitle text-center">
+          Hydrated skin begins from within. Follow this simple daily water roadmap to plump skin cells, flush toxins, and maximize your skincare results.
+        </p>
+
+        <!-- Hydration Timeline Map Cards -->
+        <div class="hydration-map-grid">
+          <div class="hydra-card">
+            <div class="hydra-emoji">🌅</div>
+            <div class="hydra-time">07:00 AM</div>
+            <h4>Wake-Up Flush</h4>
+            <p>1 glass of room temp water to rehydrate skin cells and awaken cellular detox.</p>
+            <span class="hydra-tag">💧 Glass 1</span>
+          </div>
+
+          <div class="hydra-card">
+            <div class="hydra-emoji">☀️</div>
+            <div class="hydra-time">10:30 AM</div>
+            <h4>Mid-Morning Radiance</h4>
+            <p>1 glass with lemon or cucumber to combat indoor dry air and maintain dewiness.</p>
+            <span class="hydra-tag">💧 Glass 2 &amp; 3</span>
+          </div>
+
+          <div class="hydra-card">
+            <div class="hydra-emoji">🥗</div>
+            <div class="hydra-time">01:30 PM</div>
+            <h4>Post-Lunch Balance</h4>
+            <p>Hydrates the skin matrix, promotes digestion, and prevents mid-day fatigue.</p>
+            <span class="hydra-tag">💧 Glass 4 &amp; 5</span>
+          </div>
+
+          <div class="hydra-card">
+            <div class="hydra-emoji">🧘‍♀️</div>
+            <div class="hydra-time">04:30 PM</div>
+            <h4>Afternoon Plump</h4>
+            <p>Replenishes moisture to prevent trans-epidermal water loss (TEWL) before commute.</p>
+            <span class="hydra-tag">💧 Glass 6</span>
+          </div>
+
+          <div class="hydra-card">
+            <div class="hydra-emoji">🌙</div>
+            <div class="hydra-time">08:30 PM</div>
+            <h4>Night Cell Repair</h4>
+            <p>A gentle final sip to nourish the skin barrier during overnight cellular regeneration.</p>
+            <span class="hydra-tag">💧 Glass 7 &amp; 8</span>
+          </div>
+        </div>
+
+        <!-- Interactive Water Tracker Widget -->
+        <div class="water-tracker-card">
+          <div class="tracker-header">
+            <div>
+              <h3>✨ Today's Beauty Hydration Tracker</h3>
+              <p>Click the glasses below as you drink throughout the day to fill your glow meter!</p>
+            </div>
+            <div class="glow-meter">
+              <span class="meter-text" id="waterCountText">4 of 8 glasses</span>
+              <span class="meter-percent" id="waterPercentText">50% Plump</span>
+            </div>
+          </div>
+
+          <div class="water-progress-bar-bg">
+            <div class="water-progress-bar-fill" id="waterProgressBar" style="width: 50%;"></div>
+          </div>
+
+          <div class="water-glasses-row" id="waterGlassesContainer">
+            <button class="glass-btn filled" onclick="toggleWaterGlass(0)" title="Glass 1">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 1</span>
+            </button>
+            <button class="glass-btn filled" onclick="toggleWaterGlass(1)" title="Glass 2">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 2</span>
+            </button>
+            <button class="glass-btn filled" onclick="toggleWaterGlass(2)" title="Glass 3">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 3</span>
+            </button>
+            <button class="glass-btn filled" onclick="toggleWaterGlass(3)" title="Glass 4">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 4</span>
+            </button>
+            <button class="glass-btn" onclick="toggleWaterGlass(4)" title="Glass 5">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 5</span>
+            </button>
+            <button class="glass-btn" onclick="toggleWaterGlass(5)" title="Glass 6">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 6</span>
+            </button>
+            <button class="glass-btn" onclick="toggleWaterGlass(6)" title="Glass 7">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 7</span>
+            </button>
+            <button class="glass-btn" onclick="toggleWaterGlass(7)" title="Glass 8">
+              <span class="glass-icon">💧</span>
+              <span class="glass-lbl">Glass 8</span>
+            </button>
+          </div>
+
+          <div class="tracker-footer-tip" id="hydrationTip">
+            <span>🌸 <strong>Hydration Tip:</strong> Drinking water consistently throughout the day prevents dehydration lines and boosts ceramide synthesis!</span>
+            <button class="btn btn-ghost btn-sm" onclick="resetWaterTracker()">Reset Tracker</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Key Features Section (Simplified 3 Clean Cards) -->
+    <section class="section features-section" id="features">
+      <div class="container">
+        <div class="section-badge-center">
+          <span class="section-tag">Core Features</span>
+        </div>
+        <h2 class="section-title text-center">
+          Essential Skincare, <span class="italic-serif highlight-text">Intelligently Simple</span>
+        </h2>
+        <p class="section-subtitle text-center">
+          Everything you need for glowing, calm skin without the fluff.
+        </p>
+
+        <div class="features-grid-simple">
+          <!-- Feature 1 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i data-lucide="layers"></i>
+            </div>
+            <h3>Personalized AM/PM Routines</h3>
+            <p>
+              Targeted morning defense (Vitamin C, SPF, Antioxidants) and nighttime repair (Ceramides, Peptides, Gentle Retinoids) matched to your skin profile.
+            </p>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i data-lucide="activity"></i>
+            </div>
+            <h3>Skin &amp; Barrier Tracking</h3>
+            <p>
+              Log your skin milestones, track barrier resilience, and monitor redness reduction as your skin returns to natural balance.
+            </p>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i data-lucide="flask-conical"></i>
+            </div>
+            <h3>Smart Recommendations</h3>
+            <p>
+              Brand-agnostic suggestions with ingredient compatibility checks to ensure no actives fight each other or trigger irritation.
+            </p>
+          </div>
+        </div>
+
+        <div class="features-cta-box">
+          <h3>Ready to discover your optimal routine?</h3>
+          <p>Scan your face with camera or take the 2-minute diagnostic.</p>
+          <div class="cta-btns">
+            <button class="btn btn-primary btn-lg" onclick="openCameraModal()">
+              <i data-lucide="camera"></i>
+              <span>Scan Face with Camera</span>
+            </button>
+            <button class="btn btn-secondary btn-lg" onclick="openAssessmentModal()">
+              <i data-lucide="clipboard-list"></i>
+              <span>Take Quiz</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Clean Minimal Footer -->
+  <footer class="site-footer">
+    <div class="container footer-bottom-clean">
+      <div class="footer-left">
+        <a href="#" class="logo">
+          <div class="logo-icon-wrapper">
+            <i data-lucide="sparkles" class="logo-icon"></i>
+          </div>
+          <span class="logo-text">Skin<span>Sense</span></span>
+        </a>
+        <p>AI-powered personalized skincare and daily hydration companion.</p>
+      </div>
+
+      <div class="footer-links-row">
+        <a href="#home">Home</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#hydration">Hydration Map</a>
+        <a href="#features">Features</a>
+        <a href="javascript:void(0)" onclick="openLoginModal()">Login</a>
+      </div>
+
+      <p class="copyright">&copy; 2026 SkinSense. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================== -->
+  <!-- MODAL 1: Live Camera Face Scanner Modal        -->
+  <!-- ============================================== -->
+  <div class="modal-backdrop" id="cameraModal" aria-hidden="true">
+    <div class="modal-container camera-modal-container">
+      <button class="modal-close-btn" onclick="closeCameraModal()" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="camera-modal-header">
+        <div class="pill-tag"><i data-lucide="scan"></i> Live Skin Diagnostic</div>
+        <h3 id="cameraModalTitle">Face Assessment Scanner</h3>
+        <p id="cameraModalSub">Position your face inside the guide frame in a well-lit area.</p>
+      </div>
+
+      <!-- Live Video View -->
+      <div class="camera-stream-wrapper" id="cameraStreamWrapper">
+        <video id="cameraVideo" autoplay playsinline muted></video>
+        <canvas id="cameraCanvas" class="hidden"></canvas>
+        
+        <!-- Scanning Oval Overlay -->
+        <div class="scanner-frame-overlay" id="scannerOverlay">
+          <div class="scanner-oval">
+            <div class="scan-laser-line"></div>
+          </div>
+          <span class="scanner-status-pill"><i data-lucide="eye"></i> Align face inside oval</span>
+        </div>
+
+        <!-- Captured Snapshot Image Preview (Initially Hidden) -->
+        <div class="captured-preview-wrapper hidden" id="capturedPreviewWrapper">
+          <img id="capturedPhotoImg" src="" alt="Captured Skin Assessment Photo">
+          <div class="analysis-tags-overlay">
+            <span class="analysis-tag tag-tzone"><i data-lucide="check"></i> T-Zone: Balanced</span>
+            <span class="analysis-tag tag-barrier"><i data-lucide="shield"></i> Barrier: 93%</span>
+            <span class="analysis-tag tag-hydration"><i data-lucide="droplets"></i> Hydration: Good</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Camera Action Buttons -->
+      <div class="camera-controls-row" id="cameraLiveControls">
+        <button class="btn btn-secondary" onclick="triggerFileInputFallback()">
+          <i data-lucide="upload"></i>
+          <span>Upload Photo</span>
+        </button>
+        <button class="btn btn-primary btn-lg shadow-glow" id="takePhotoBtn" onclick="captureUserPhoto()">
+          <i data-lucide="camera"></i>
+          <span>Capture Photo</span>
+        </button>
+        <!-- Hidden file input fallback -->
+        <input type="file" id="cameraFallbackFileInput" accept="image/*" class="hidden" onchange="handleFallbackPhotoUpload(event)">
+      </div>
+
+      <!-- Post-Capture Controls (Initially Hidden) -->
+      <div class="camera-controls-row hidden" id="cameraCapturedControls">
+        <button class="btn btn-outline" onclick="retakeUserPhoto()">
+          <i data-lucide="rotate-ccw"></i>
+          <span>Retake</span>
+        </button>
+        <button class="btn btn-primary btn-lg" onclick="confirmCapturedPhotoAndProceed()">
+          <span>Generate Routine From Photo</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+      </div>
+
+      <!-- Simulated AI Analyzing State -->
+      <div class="camera-analyzing-overlay hidden" id="cameraAnalyzingOverlay">
+        <div class="pulse-ring"></div>
+        <h4>Analyzing skin texture &amp; hydration...</h4>
+        <p>Evaluating epidermal moisture retention and redness points.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL 2: Interactive Skin Assessment Quiz Flow -->
+  <!-- ============================================== -->
+  <div class="modal-backdrop" id="assessmentModal" aria-hidden="true">
+    <div class="modal-container">
+      <button class="modal-close-btn" onclick="closeAssessmentModal()" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <!-- Step Indicator -->
+      <div class="quiz-header" id="quizHeader">
+        <div class="quiz-progress-track">
+          <div class="quiz-progress-bar" id="quizProgress" style="width: 33%;"></div>
+        </div>
+        <div class="quiz-step-title-row">
+          <span class="quiz-step-label" id="quizStepCount">Step 1 of 3</span>
+          <span class="quiz-category-label" id="quizCategoryLabel">Skin Identification</span>
+        </div>
+      </div>
+
+      <!-- Assessment Content Screens -->
+      <div class="quiz-body">
+        
+        <!-- STEP 1: Skin Type -->
+        <div class="quiz-step active" id="quizStep1">
+          <h3 class="quiz-question">How does your skin feel a few hours after cleansing?</h3>
+          <p class="quiz-instruction">Select the description that closest matches your bare skin.</p>
+          <div class="options-grid">
+            <button class="option-btn" onclick="selectQuizOption(1, 'Tight & Flaky', 'Dry / Low Sebum')">
+              <div class="option-icon"><i data-lucide="cloud-snow"></i></div>
+              <div class="option-text">
+                <strong>Tight, dry, or flaky</strong>
+                <span>Feels stretched, absorbs moisturizer immediately</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(1, 'Shiny T-Zone', 'Combination')">
+              <div class="option-icon"><i data-lucide="shuffle"></i></div>
+              <div class="option-text">
+                <strong>Shiny T-Zone, normal cheeks</strong>
+                <span>Oil develops around forehead &amp; nose</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(1, 'Slick & Shiny', 'Oily')">
+              <div class="option-icon"><i data-lucide="droplet"></i></div>
+              <div class="option-text">
+                <strong>Slick &amp; visibly shiny</strong>
+                <span>Prone to oiliness and dilated pores</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(1, 'Reactive & Stinging', 'Sensitive / Reactive')">
+              <div class="option-icon"><i data-lucide="shield-alert"></i></div>
+              <div class="option-text">
+                <strong>Flushes easily &amp; sensitive</strong>
+                <span>Redness triggers easily with products or temperature</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Primary Skin Concern -->
+        <div class="quiz-step" id="quizStep2">
+          <h3 class="quiz-question">What is your primary skincare focus?</h3>
+          <p class="quiz-instruction">Our AI will prioritize the hero active ingredient around this goal.</p>
+          <div class="options-grid">
+            <button class="option-btn" onclick="selectQuizOption(2, 'Barrier Repair & Calming', 'Barrier Repair')">
+              <div class="option-icon"><i data-lucide="shield"></i></div>
+              <div class="option-text">
+                <strong>Rebuild damaged moisture barrier</strong>
+                <span>Heal dehydration, redness, and sensitivity</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(2, 'Clear Blemishes & Pores', 'Acne Defense')">
+              <div class="option-icon"><i data-lucide="sparkle"></i></div>
+              <div class="option-text">
+                <strong>Clear blemishes &amp; pore congestion</strong>
+                <span>Address blackheads, breakouts, and texture</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(2, 'Fade Dark Spots & Glow', 'Radiance')">
+              <div class="option-icon"><i data-lucide="sun"></i></div>
+              <div class="option-text">
+                <strong>Fade dark spots &amp; boost glow</strong>
+                <span>Brighten uneven tone and post-acne marks</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(2, 'Hydrate & Plump', 'Deep Hydration')">
+              <div class="option-icon"><i data-lucide="droplets"></i></div>
+              <div class="option-text">
+                <strong>Deep hydration &amp; cellular bounce</strong>
+                <span>Restore suppleness and smooth fine dehydration lines</span>
+              </div>
+            </button>
+          </div>
+          <div class="quiz-nav-row">
+            <button class="btn btn-ghost btn-sm" onclick="goToQuizStep(1)">&larr; Back</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Environment -->
+        <div class="quiz-step" id="quizStep3">
+          <h3 class="quiz-question">What is your daily environment?</h3>
+          <p class="quiz-instruction">Humidity dictates optimal cream vs gel formulation texture.</p>
+          <div class="options-grid">
+            <button class="option-btn" onclick="selectQuizOption(3, 'Dry / High AC', 'Low Humidity')">
+              <div class="option-icon"><i data-lucide="wind"></i></div>
+              <div class="option-text">
+                <strong>Dry indoor / heavy AC or heating</strong>
+                <span>Air pulls moisture from skin</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(3, 'Humid / Tropical', 'High Humidity')">
+              <div class="option-icon"><i data-lucide="cloud-rain"></i></div>
+              <div class="option-text">
+                <strong>Warm, humid, or tropical</strong>
+                <span>Requires lightweight non-comedogenic textures</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(3, 'City Commute', 'Urban')">
+              <div class="option-icon"><i data-lucide="building"></i></div>
+              <div class="option-text">
+                <strong>Urban city environment</strong>
+                <span>Needs antioxidant defense against pollution</span>
+              </div>
+            </button>
+            <button class="option-btn" onclick="selectQuizOption(3, 'High Sun Exposure', 'High UV')">
+              <div class="option-icon"><i data-lucide="sun-medium"></i></div>
+              <div class="option-text">
+                <strong>High outdoor sun exposure</strong>
+                <span>Requires enhanced photoprotection</span>
+              </div>
+            </button>
+          </div>
+          <div class="quiz-nav-row">
+            <button class="btn btn-ghost btn-sm" onclick="goToQuizStep(2)">&larr; Back</button>
+          </div>
+        </div>
+
+        <!-- STEP 4: Processing Animation -->
+        <div class="quiz-step" id="quizStep4">
+          <div class="processing-wrap">
+            <div class="pulse-ring"></div>
+            <div class="processing-icon">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <h3 class="processing-title">SkinSense AI is calibrating your routine...</h3>
+            <p class="processing-subtitle" id="processingStatusText">Cross-referencing active ingredients...</p>
+          </div>
+        </div>
+
+        <!-- STEP 5: Results Screen -->
+        <div class="quiz-step" id="quizResultStep">
+          <div class="result-header">
+            <div class="result-badge-row">
+              <span class="pill-tag"><i data-lucide="sparkles"></i> Assessment Complete</span>
+              <span class="badge-success"><i data-lucide="check-circle-2"></i> Barrier Match 99.4%</span>
+            </div>
+            <h3 class="result-title">Your Custom Skincare Blueprint</h3>
+            <p class="result-summary" id="resultSummaryText">
+              Customized for combination barrier recovery with lightweight hydration and gentle active complexes.
+            </p>
+          </div>
+
+          <!-- Barrier Score Gauge -->
+          <div class="result-stats-row">
+            <div class="r-stat-box">
+              <span class="r-stat-title">Target Barrier Score</span>
+              <div class="r-stat-big">94<small>/100</small></div>
+              <span class="r-stat-sub text-success">+22% projected</span>
+            </div>
+            <div class="r-stat-box">
+              <span class="r-stat-title">Primary Hero Complex</span>
+              <div class="r-stat-hero" id="resultHeroComplex">Ceramides + 5% Niacinamide</div>
+              <span class="r-stat-sub">Zero fragrance &middot; pH 5.5</span>
+            </div>
+            <div class="r-stat-box">
+              <span class="r-stat-title">Hydration Recommendation</span>
+              <div class="r-stat-hero">8 Glasses / Day 💧</div>
+              <span class="r-stat-sub">Tracked on Beauty Map</span>
+            </div>
+          </div>
+
+          <!-- Generated Routine Display -->
+          <div class="generated-routines-grid">
+            <!-- AM Routine -->
+            <div class="routine-col">
+              <div class="col-head">
+                <i data-lucide="sun"></i>
+                <div>
+                  <strong>Morning Protocol</strong>
+                  <span>Defend &amp; Seal</span>
+                </div>
+              </div>
+              <div class="routine-col-steps">
+                <div class="res-step">
+                  <span class="res-num">1</span>
+                  <div>
+                    <strong>Sulfate-Free Amino Acid Gel</strong>
+                    <p>Gentle wash to clear night sebum without stripping lipids.</p>
+                  </div>
+                </div>
+                <div class="res-step">
+                  <span class="res-num">2</span>
+                  <div>
+                    <strong>Centella + Hyaluronic Infusion</strong>
+                    <p>Deep water-binding hydration with soothing triterpenes.</p>
+                  </div>
+                </div>
+                <div class="res-step">
+                  <span class="res-num">3</span>
+                  <div>
+                    <strong>Invisible Fluid Shield SPF 50+</strong>
+                    <p>Broad-spectrum UVA/UVB shield with non-greasy finish.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- PM Routine -->
+            <div class="routine-col">
+              <div class="col-head pm-head">
+                <i data-lucide="moon"></i>
+                <div>
+                  <strong>Evening Protocol</strong>
+                  <span>Rebuild &amp; Restore</span>
+                </div>
+              </div>
+              <div class="routine-col-steps">
+                <div class="res-step">
+                  <span class="res-num">1</span>
+                  <div>
+                    <strong>Gentle Nourishing Milk Cleanser</strong>
+                    <p>Melts daily particulate matter smoothly.</p>
+                  </div>
+                </div>
+                <div class="res-step">
+                  <span class="res-num">2</span>
+                  <div>
+                    <strong>Targeted Active Barrier Serum</strong>
+                    <p>Dual peptides and bio-identical ceramides to restore lipid seal.</p>
+                  </div>
+                </div>
+                <div class="res-step">
+                  <span class="res-num">3</span>
+                  <div>
+                    <strong>Squalane Recovery Night Cream</strong>
+                    <p>Locks in moisture to prevent overnight water loss.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-actions-footer">
+            <button class="btn btn-outline" onclick="resetAssessment()">
+              <i data-lucide="rotate-ccw"></i>
+              <span>Retake Assessment</span>
+            </button>
+            <button class="btn btn-primary btn-lg" onclick="saveRoutineAction()">
+              <i data-lucide="bookmark"></i>
+              <span>Save Routine</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- MODAL 3: Minimal Login Modal                   -->
+  <!-- ============================================== -->
+  <div class="modal-backdrop" id="loginModal" aria-hidden="true">
+    <div class="modal-container login-modal-box">
+      <button class="modal-close-btn" onclick="closeLoginModal()" aria-label="Close modal">
+        <i data-lucide="x"></i>
+      </button>
+
+      <div class="auth-header">
+        <div class="logo-icon-wrapper">
+          <i data-lucide="sparkles" class="logo-icon"></i>
+        </div>
+        <h3 id="authTitle">Welcome to SkinSense</h3>
+        <p id="authSubtitle">Access your personalized skin health dashboard</p>
+      </div>
+
+      <div class="auth-tab-row">
+        <button class="auth-tab active" id="loginTabBtn" onclick="switchAuthTab('login')">Log In</button>
+        <button class="auth-tab" id="signupTabBtn" onclick="switchAuthTab('signup')">Create Account</button>
+      </div>
+
+      <form class="auth-form" onsubmit="handleAuthSubmit(event)">
+        <div class="form-group" id="nameFieldGroup" style="display: none;">
+          <label class="form-label" for="userNameInput">Your Full Name</label>
+          <div class="input-with-icon">
+            <i data-lucide="user"></i>
+            <input type="text" id="userNameInput" placeholder="Jane Doe" class="form-input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="userEmailInput">Email Address</label>
+          <div class="input-with-icon">
+            <i data-lucide="mail"></i>
+            <input type="email" id="userEmailInput" placeholder="jane@example.com" required class="form-input">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label class="form-label" for="userPasswordInput">Password</label>
+            <a href="#" class="forgot-link" id="forgotPasswordLink">Forgot?</a>
+          </div>
+          <div class="input-with-icon">
+            <i data-lucide="lock"></i>
+            <input type="password" id="userPasswordInput" placeholder="••••••••" required class="form-input">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full btn-lg" id="authSubmitBtn">
+          <span>Log In</span>
+          <i data-lucide="arrow-right"></i>
+        </button>
+
+        <div class="auth-status-toast hidden" id="authStatusToast">
+          <i data-lucide="check-circle-2"></i>
+          <span>Signed in successfully!</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- Cute AI Meow Mascot Sticker & Speech Cloud     -->
+  <!-- ============================================== -->
+  <div class="meow-sticker-container" id="meowCompanion" title="Click me for a skincare tip! 🐱">
+    <!-- Thought / Speech Cloud -->
+    <div class="meow-speech-cloud" id="meowSpeechCloud">
+      <div class="cloud-content" id="meowSpeechText">Meow! Remember to hydrate your skin barrier today! 💧✨</div>
+      <div class="cloud-tail-1"></div>
+      <div class="cloud-tail-2"></div>
+    </div>
+
+    <!-- Cute Chibi Kitty Sticker SVG -->
+    <div class="meow-cat-sticker" id="meowCatBody">
+      <svg class="cat-svg" viewBox="0 0 100 100" width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Sticker White Die-cut Border Glow -->
+        <filter id="stickerShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="rgba(142, 101, 211, 0.35)"/>
+        </filter>
+
+        <g filter="url(#stickerShadow)">
+          <!-- Tail -->
+          <path class="cat-tail" d="M72 74C82 72 88 62 86 52C85 46 80 44 76 47C72 50 74 58 70 65C68 68 64 70 60 71" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+          <path class="cat-tail" d="M72 74C82 72 88 62 86 52C85 46 80 44 76 47C72 50 74 58 70 65C68 68 64 70 60 71" stroke="#E6D7FB" stroke-width="7" stroke-linecap="round"/>
+
+          <!-- Cat Body -->
+          <ellipse cx="50" cy="68" rx="26" ry="20" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5"/>
+          <ellipse cx="50" cy="68" rx="24" ry="18" fill="#FBF9FE" stroke="#8E65D3" stroke-width="2.5"/>
+
+          <!-- Paws -->
+          <ellipse cx="36" cy="84" rx="7" ry="5" fill="#FFFFFF" stroke="#8E65D3" stroke-width="2"/>
+          <ellipse cx="64" cy="84" rx="7" ry="5" fill="#FFFFFF" stroke="#8E65D3" stroke-width="2"/>
+
+          <!-- Ears Outer -->
+          <polygon class="cat-ear ear-left" points="26,38 34,14 50,30" fill="#FFFFFF" stroke="#8E65D3" stroke-width="2.5" stroke-linejoin="round"/>
+          <polygon class="cat-ear ear-right" points="74,38 66,14 50,30" fill="#FFFFFF" stroke="#8E65D3" stroke-width="2.5" stroke-linejoin="round"/>
+
+          <!-- Ears Inner Pink -->
+          <polygon points="29,34 35,19 46,29" fill="#F3C4D8"/>
+          <polygon points="71,34 65,19 54,29" fill="#F3C4D8"/>
+
+          <!-- Head -->
+          <ellipse cx="50" cy="42" rx="27" ry="22" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="5"/>
+          <ellipse cx="50" cy="42" rx="25" ry="20" fill="#FFFFFF" stroke="#8E65D3" stroke-width="2.5"/>
+
+          <!-- Lavender Spot on Head -->
+          <path d="M50 22C43 22 38 25 35 30C41 31 47 28 50 22Z" fill="#D4BFF9"/>
+
+          <!-- Cheeks Blush -->
+          <ellipse class="cat-blush" cx="33" cy="46" rx="4.5" ry="2.5" fill="#FFB4D6" opacity="0.8"/>
+          <ellipse class="cat-blush" cx="67" cy="46" rx="4.5" ry="2.5" fill="#FFB4D6" opacity="0.8"/>
+
+          <!-- Eyes (Blinking Group) -->
+          <g class="cat-eyes" id="catEyesOpen">
+            <ellipse cx="38" cy="40" rx="3.5" ry="4" fill="#2D2142"/>
+            <ellipse cx="62" cy="40" rx="3.5" ry="4" fill="#2D2142"/>
+            <circle cx="39.2" cy="38.5" r="1.3" fill="#FFFFFF"/>
+            <circle cx="63.2" cy="38.5" r="1.3" fill="#FFFFFF"/>
+          </g>
+
+          <g class="cat-eyes-happy hidden" id="catEyesHappy">
+            <path d="M34 40Q38 36 42 40" stroke="#2D2142" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+            <path d="M58 40Q62 36 66 40" stroke="#2D2142" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+          </g>
+
+          <!-- Nose & Mouth -->
+          <polygon points="50,44 47.5,42 52.5,42" fill="#E88CAE"/>
+          <path d="M46 46C48 48 50 47 50 45C50 47 52 48 54 46" stroke="#4A3E5D" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+          <!-- Whiskers -->
+          <line x1="20" y1="42" x2="30" y2="43" stroke="#8E65D3" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="19" y1="46" x2="29" y2="46" stroke="#8E65D3" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="80" y1="42" x2="70" y2="43" stroke="#8E65D3" stroke-width="1.4" stroke-linecap="round"/>
+          <line x1="81" y1="46" x2="71" y2="46" stroke="#8E65D3" stroke-width="1.4" stroke-linecap="round"/>
+
+          <!-- Tiny Lavender Bell Collar -->
+          <path d="M38 58C44 61 56 61 62 58" stroke="#8E65D3" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="50" cy="62" r="3.5" fill="#E8B931" stroke="#FFFFFF" stroke-width="1"/>
+        </g>
+      </svg>
+      <div class="heart-bubble" id="meowHeart">💖</div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
